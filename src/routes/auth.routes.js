@@ -1,6 +1,8 @@
 const express= require('express')
 const authController=require('../controllers/auth.controller')
+const authMiddleware=require('../middleware/auth.middleware')
 const authRouter=express.Router()
+
 /**
  * @route POST /api/auth/register
  * @description Register User
@@ -14,4 +16,18 @@ authRouter.post("/register",authController.registerUserController)
  * @access Public
  */
 authRouter.post("/login",authController.loginUserController)
+/**
+ * @route GET/api/auth/logout
+ * @description clear token from cookie and add it to blacklist
+ * @access public
+ */
+authRouter.get("/logout",authController.logoutUserController)
+
+
+/**
+ * @route GET/api/auth/get-me
+ * @description Get current logged in user
+ * @access private
+ */
+authRouter.get("/get-me",authMiddleware.authUser,authController.getMeController)
 module.exports=authRouter
