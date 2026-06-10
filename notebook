@@ -1,0 +1,19 @@
+Front end has 4 layers
+ UI
+ components
+ =>components
+ =>pages
+
+ HOOK
+ =>hook
+ 
+
+
+ STATE
+ =>auth.context.jsx
+ =>ai.context.jsx
+
+
+ API
+ =>services
+ =>auth.api.jsx
