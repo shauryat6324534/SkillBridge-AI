@@ -1,52 +1,58 @@
 import axios from "axios"
 
-export async function register(username , email , password)
-{
-    try{
-        const response=axios.post('http://localhost3000/api/auth/register',{
-    username,email,password
-        },{
-    withCredentials:true
- })
- return response.data
-}catch(err)
-{
-    console.log(err)
-}
-}
+const API_BASE_URL = "http://localhost:3000/api/auth"
 
-export async function login(email , password)
-{
-    try{
-        const response=axios.post('http://localhost3000/api/auth/login',{
-    email,password
-        },{
-    withCredentials:true
- })
- return response.data
-}catch(err)
-{
-    console.log(err)
-}
-}
-
-export async function logout(){
-    try{
-        const response=axios.post('http://localhost3000/api/auth/logout',{
-    withCredentials:true
- })
- return response.data
-}catch(err)
-{
-    console.log(err)
-}
-}
-
-export async function getMe(){
-    try{
-        const response=axios.get('http://localhost3000/api/auth/me',{ withCredentials: true })
+export async function register({ username, email, password }) {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/register`, {
+            username,
+            email,
+            password
+        }, {
+            withCredentials: true
+        })
         return response.data
-    }catch(err){
-        console.log(err)
+    } catch (err) {
+        console.error("Register API error:", err)
+        throw err
+    }
+}
+
+export async function login({ email, password }) {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/login`, {
+            email,
+            password
+        }, {
+            withCredentials: true
+        })
+        return response.data
+    } catch (err) {
+        console.error("Login API error:", err)
+        throw err
+    }
+}
+
+export async function logout() {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/logout`, {
+            withCredentials: true
+        })
+        return response.data
+    } catch (err) {
+        console.error("Logout API error:", err)
+        throw err
+    }
+}
+
+export async function getMe() {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/get-me`, { 
+            withCredentials: true 
+        })
+        return response.data
+    } catch (err) {
+        console.error("GetMe API error:", err)
+        throw err
     }
 }
